@@ -1,4 +1,4 @@
-# Rarable-Clone-Moralis-Youtube-Tutorial
+# Rarible-Clone-Moralis-Youtube-Tutorial
 Updated changes on youtube tutorial on Rarable clone by Moralis recent Nitro SDK
 
 As the new Nitro SDK update has removed some of the important tables like "EthNFTTokenOwners" from the server. I used Web3API to fetch details of these tables using getNFTOnwers in the Moralis SDK. 
