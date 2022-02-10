@@ -6,8 +6,8 @@ Moralis.Cloud.define("getUserItems", async (request) => {
     const results = [];
  	for (let i = 0; i < queryResults.length; ++i) {
       results.push({
-        "tokenObjectId": queryResults[i].id,
-        "tokenid": queryResults[i].token_id,
+        "tokenObjectId": queryResults[i].block_number,
+        "tokenId": queryResults[i].token_id,
         "tokenAddress": queryResults[i].token_address,
         "symbol": queryResults[i].symbol,
         "tokenUri": queryResults[i].token_uri,
@@ -32,7 +32,7 @@ Moralis.Cloud.beforeSave("ItemsForSale", async (request) => {
         if (userObject){
             request.object.set('user', userObject);
         }
-      	//request.object.set('token', object);
+      	request.object.set('token', object);
     }
   });
 
@@ -66,9 +66,9 @@ Moralis.Cloud.beforeSave("SoldItems", async (request) => {
     const results = [];
   
     for (let i = 0; i < queryResults.length; ++i) {
-  
+      
       if (!queryResults[i].attributes.token || !queryResults[i].attributes.user) continue;
-  
+
       results.push({
         "uid": queryResults[i].attributes.uid,
         "tokenId": queryResults[i].attributes.tokenId,
@@ -102,12 +102,12 @@ Moralis.Cloud.beforeSave("SoldItems", async (request) => {
         "tokenAddress": queryResult.attributes.tokenAddress,
         "askingPrice": queryResult.attributes.askingPrice,
   
-        "symbol": queryResult.attributes.token.attributes.symbol,
-        "tokenUri": queryResult.attributes.token.attributes.token_uri,
-        "ownerOf": queryResult.attributes.token.attributes.owner_of,
+        "symbol": queryResult.attributes.token.symbol,
+        "tokenUri": queryResult.attributes.token.token_uri,
+        "ownerOf": queryResult.attributes.token.owner_of,
         "tokenObjectId": queryResult.attributes.token.id,
   
-        "sellerUsername": queryResult.attributes.user.attributes.username,
-        "sellerAvatar": queryResult.attributes.user.attributes.avatar,
+        "sellerUsername": queryResult.attributes.user.username,
+        "sellerAvatar": queryResult.attributes.user.avatar,
       };
   });
